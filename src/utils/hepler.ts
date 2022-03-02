@@ -1,0 +1,15 @@
+export const getImageDimensions = (file: File | string) => {
+  return new Promise<{ width: number; height: number }>((resolve, reject) => {
+    const img = new Image();
+    img.src = typeof file === "string" ? file : URL.createObjectURL(file);
+    // the following handler will fire after the successful loading of the image
+    img.onload = () => {
+      const { naturalWidth: width, naturalHeight: height } = img;
+      resolve({ width, height });
+    };
+    // and this handler will fire if there was an error with the image (like if it's not really an image or a corrupted one)
+    img.onerror = () => {
+      reject(new Error("There was some problem with the image."));
+    };
+  });
+};

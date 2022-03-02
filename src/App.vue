@@ -1,27 +1,43 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <div class="editor-container">
+    <div class="left-panel"><LeftPanel /></div>
+    <div class="center-panel"><CenterPanel /></div>
+    <div class="right-panel"></div>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
+import LeftPanel from "@/views/left-panel/index.vue";
+import CenterPanel from "@/views/center-panel/index.vue";
 
 export default defineComponent({
   name: "App",
-  components: {
-    HelloWorld,
-  },
+  components: { LeftPanel, CenterPanel },
 });
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.editor-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  .left-panel {
+    width: 300px;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .center-panel {
+    flex: 1;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .right-panel {
+    width: 300px;
+    min-height: 100vh;
+  }
 }
 </style>
