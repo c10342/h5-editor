@@ -14,6 +14,9 @@ const componentsList: ComponentData[] = [
     },
     name: "custom-text",
     id: uuidv4(),
+    layerName: "图层1",
+    isLocked: false,
+    isHidden: false,
   },
   {
     props: {
@@ -22,16 +25,25 @@ const componentsList: ComponentData[] = [
     },
     name: "custom-text",
     id: uuidv4(),
+    layerName: "图层2",
+    isLocked: false,
+    isHidden: false,
   },
   {
     props: { text: "hello3", fontSize: "15px" },
     name: "custom-text",
     id: uuidv4(),
+    layerName: "图层3",
+    isLocked: false,
+    isHidden: false,
   },
   {
     props: { imageSrc: "https://static.imooc-lego.com/imooc-test/YqyK_Y.png" },
     name: "custom-image",
     id: uuidv4(),
+    layerName: "图层4",
+    isLocked: false,
+    isHidden: false,
   },
 ];
 
@@ -57,12 +69,18 @@ export default createStore<GlobalDataProps>({
       state.currentComponentId = currentId;
     },
     // 更新组件的值
-    updateComponent(state, { key, value }) {
+    updateComponent(state, { key, value, id, isRoot }) {
+      // 有id就根据id进行查询
       const currentComponent = state.components.find(
-        (component) => component.id === state.currentComponentId
+        (component) => component.id === (id || state.currentComponentId)
       );
       if (currentComponent) {
-        currentComponent.props[key] = value;
+        if (isRoot) {
+          // 修改的是第一层元素
+          (currentComponent as any)[key] = value;
+        } else {
+          currentComponent.props[key] = value;
+        }
       }
     },
   },

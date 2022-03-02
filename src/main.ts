@@ -9,6 +9,11 @@ import {
   Burger,
   Upload,
   Plus,
+  Lock,
+  Unlock,
+  VideoPause,
+  VideoPlay,
+  Ship,
 } from "@element-plus/icons-vue";
 import "element-plus/dist/index.css";
 import "@/assets/styles/reset.css";
@@ -21,7 +26,18 @@ import RenderVNode from "@/components/render-vnode/index";
 
 const customComponents = [CustomText, CustomImage, CustomShape, RenderVNode];
 
-const iconsList = [Document, Picture, Burger, Upload, Plus];
+const iconsList = [
+  Document,
+  Picture,
+  Burger,
+  Upload,
+  Plus,
+  Lock,
+  Unlock,
+  VideoPause,
+  VideoPlay,
+  Ship,
+];
 
 const app = createApp(App);
 app.use(store).use(ElementPlus);

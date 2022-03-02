@@ -20,7 +20,10 @@ export default defineComponent({
   components: { EditorWrapper },
   setup(props, context) {
     const store = useStore<GlobalDataProps>();
-    const components = computed(() => store.state.components);
+    // 过滤掉隐藏的组件
+    const components = computed(() =>
+      store.state.components.filter((component) => !component.isHidden)
+    );
     return { components };
   },
 });
