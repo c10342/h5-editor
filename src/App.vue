@@ -2,7 +2,7 @@
   <div class="editor-container">
     <div class="left-panel"><LeftPanel /></div>
     <div class="center-panel"><CenterPanel /></div>
-    <div class="right-panel"></div>
+    <div class="right-panel"><RightPanel /></div>
   </div>
 </template>
 
@@ -10,10 +10,11 @@
 import { defineComponent } from "vue";
 import LeftPanel from "@/views/left-panel/index.vue";
 import CenterPanel from "@/views/center-panel/index.vue";
+import RightPanel from "@/views/right-panel/index.vue";
 
 export default defineComponent({
   name: "App",
-  components: { LeftPanel, CenterPanel },
+  components: { LeftPanel, CenterPanel, RightPanel },
 });
 </script>
 

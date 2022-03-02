@@ -4,7 +4,7 @@ export interface ComponentData {
   // 组件id
   id: string;
   //   组件名称，通过动态组件渲染
-  name: string;
+  name: "custom-text" | "custom-image" | "custom-shape";
 }
 
 export interface EditProps {

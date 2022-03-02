@@ -1,3 +1,4 @@
+import { uploadImage } from "@/api";
 import request from "@/utils/request";
 
 type fn = (data?: any) => any;
@@ -34,11 +35,7 @@ class UploadImage {
   private handleUploadFile(file: File) {
     const formData = new FormData();
     formData.append("file", file);
-    return request.post("/api/utils/upload-img", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    return uploadImage(formData);
   }
 
   private uploadFile(file: File) {

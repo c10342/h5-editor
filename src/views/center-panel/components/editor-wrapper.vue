@@ -59,5 +59,8 @@ export default defineComponent({
   :deep(.custom-text) {
     position: relative !important;
   }
+  :deep(.custom-image) {
+    position: relative !important;
+  }
 }
 </style>

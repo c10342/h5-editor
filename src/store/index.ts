@@ -28,6 +28,11 @@ const componentsList: ComponentData[] = [
     name: "custom-text",
     id: uuidv4(),
   },
+  {
+    props: { imageSrc: "https://static.imooc-lego.com/imooc-test/YqyK_Y.png" },
+    name: "custom-image",
+    id: uuidv4(),
+  },
 ];
 
 export default createStore<GlobalDataProps>({

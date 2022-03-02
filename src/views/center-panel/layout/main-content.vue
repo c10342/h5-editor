@@ -14,7 +14,7 @@
 import { GlobalDataProps } from "@/types/store";
 import { computed, defineComponent } from "vue";
 import { useStore } from "vuex";
-import EditorWrapper from "./editor-wrapper.vue";
+import EditorWrapper from "../components/editor-wrapper.vue";
 
 export default defineComponent({
   components: { EditorWrapper },

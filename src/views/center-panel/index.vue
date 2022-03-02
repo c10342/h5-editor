@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import MainContent from "./main-content.vue";
+import MainContent from "./layout/main-content.vue";
 
 export default defineComponent({
   components: { MainContent },

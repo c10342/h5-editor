@@ -30,8 +30,8 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import TextList from "./text-list.vue";
-import ImageList from "./image-list.vue";
+import TextList from "./layout/text-list.vue";
+import ImageList from "./layout/image-list.vue";
 
 export default defineComponent({
   components: { TextList, ImageList },
