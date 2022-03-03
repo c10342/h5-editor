@@ -1,3 +1,5 @@
+import { textDefaultProps } from "@/default-props";
+
 export const defaultTextTemplate = [
   {
     text: "大标题",
@@ -63,4 +65,9 @@ export const defaultTextTemplate = [
     tag: "button",
     textAlign: "center",
   },
-];
+].map((item) => {
+  return {
+    ...textDefaultProps,
+    ...item,
+  };
+});

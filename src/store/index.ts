@@ -1,10 +1,12 @@
 import { createStore } from "vuex";
 import { v4 as uuidv4 } from "uuid";
 import { ComponentData, GlobalDataProps } from "@/types/store";
+import { textDefaultProps } from "@/default-props";
 
 const componentsList: ComponentData[] = [
   {
     props: {
+      ...textDefaultProps,
       text: "hello1",
       fontSize: "20px",
       color: "#fe4321",

@@ -37,8 +37,8 @@ export default defineComponent({
     box-sizing: border-box;
   }
   .right-panel {
-    width: 300px;
-    min-height: 100vh;
+    width: 350px;
+    height: 100vh;
   }
 }
 </style>
