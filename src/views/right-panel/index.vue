@@ -6,7 +6,9 @@
     <el-tab-pane label="图层设置" name="second">
       <LayerTable />
     </el-tab-pane>
-    <el-tab-pane label="页面设置" name="third">Role</el-tab-pane>
+    <el-tab-pane label="页面设置" name="third">
+      <PageTable />
+    </el-tab-pane>
   </el-tabs>
 </template>
 
@@ -14,9 +16,10 @@
 import { defineComponent, ref } from "vue";
 import PropsTable from "./layout/props-table.vue";
 import LayerTable from "./layout/layer-table.vue";
+import PageTable from "./layout/page-table.vue";
 
 export default defineComponent({
-  components: { PropsTable, LayerTable },
+  components: { PropsTable, LayerTable, PageTable },
   setup() {
     const activeName = ref("first");
     return {

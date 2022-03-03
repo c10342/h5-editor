@@ -47,6 +47,8 @@ const slider = {
   initalTransform: stringToInt,
   afterTransform: numberToPx,
 };
+
+const select = { component: "el-select", subComponent: "el-option" };
 export const mapPropsToForms: PropsToForms = {
   // 公共属性
   // 大小
@@ -76,9 +78,8 @@ export const mapPropsToForms: PropsToForms = {
   },
   // 边框
   borderStyle: {
-    component: "el-select",
     text: "边框类型",
-    subComponent: "el-option",
+    ...select,
     options: [
       { value: "none", label: "无" },
       { value: "solid", label: "实线" },
@@ -154,9 +155,8 @@ export const mapPropsToForms: PropsToForms = {
     ...inputNumber,
   },
   fontFamily: {
-    component: "el-select",
     text: "字体",
-    subComponent: "el-option",
+    ...select,
     options: [{ showText: "无", value: "", label: "无" }, ...fontFamilyOptions],
   },
   fontWeight: {
@@ -223,5 +223,24 @@ export const mapPropsToForms: PropsToForms = {
   },
   imageSrc: {
     component: "image-process",
+  },
+  backgroundSize: {
+    text: "背景大小",
+    ...select,
+    options: [
+      { value: "contain", label: "自动缩放" },
+      { value: "cover", label: "自动填充" },
+      { value: "", label: "默认" },
+    ],
+  },
+  backgroundRepeat: {
+    text: "背景重复",
+    ...select,
+    options: [
+      { value: "no-repeat", label: "无重复" },
+      { value: "repeat-x", label: "X轴重复" },
+      { value: "repeat-y", label: "Y轴重复" },
+      { value: "repeat", label: "全部重复" },
+    ],
   },
 };

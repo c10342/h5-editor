@@ -49,10 +49,22 @@ const componentsList: ComponentData[] = [
   },
 ];
 
+const defaultPageProps = {
+  backgroundColor: "#ffffff",
+  backgroundImage: "",
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "cover",
+  height: "560px",
+};
+
 export default createStore<GlobalDataProps>({
   state: {
     components: componentsList,
     currentComponentId: "",
+    page: {
+      title: "test",
+      props: defaultPageProps,
+    },
   },
   getters: {
     currentComponent(state) {
@@ -89,6 +101,10 @@ export default createStore<GlobalDataProps>({
       const temp = state.components[index1];
       state.components[index1] = state.components[index2];
       state.components[index2] = temp;
+    },
+    // 更新页面值
+    updatePage(state, { key, value }) {
+      state.page.props[key] = value;
     },
   },
   actions: {},

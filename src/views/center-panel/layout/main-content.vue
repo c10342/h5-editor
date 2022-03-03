@@ -1,12 +1,14 @@
 <template>
   <div class="preview-list">
-    <EditorWrapper
-      v-for="component in components"
-      :key="component.id"
-      :id="component.id"
-    >
-      <component :is="component.name" v-bind="component.props" />
-    </EditorWrapper>
+    <div class="body-container" :style="pageStyle">
+      <EditorWrapper
+        v-for="component in components"
+        :key="component.id"
+        :id="component.id"
+      >
+        <component :is="component.name" v-bind="component.props" />
+      </EditorWrapper>
+    </div>
   </div>
 </template>
 
@@ -24,7 +26,10 @@ export default defineComponent({
     const components = computed(() =>
       store.state.components.filter((component) => !component.isHidden)
     );
-    return { components };
+    const pageStyle = computed(() => {
+      return store.state.page.props;
+    });
+    return { components, pageStyle };
   },
 });
 </script>
@@ -42,5 +47,9 @@ export default defineComponent({
   position: fixed;
   margin-top: 50px;
   max-height: 80vh;
+
+  .body-container {
+    width: 100%;
+  }
 }
 </style>

@@ -17,7 +17,7 @@
 import { computed, defineComponent } from "vue";
 import { useStore } from "vuex";
 import { GlobalDataProps } from "@/types/store";
-import PropsList from "../components/propr-list.vue";
+import PropsList from "../components/props-list.vue";
 
 export default defineComponent({
   components: { PropsList },

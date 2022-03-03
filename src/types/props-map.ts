@@ -1,5 +1,9 @@
 import { VNode } from "vue";
-import { ImageDefaultProps, TextDefaultProps } from "./default-props";
+import {
+  ImageDefaultProps,
+  ShapeDefaultProps,
+  TextDefaultProps,
+} from "./default-props";
 
 export interface PropToForm {
   // 渲染的组件名称
@@ -23,5 +27,7 @@ export interface PropToForm {
 }
 
 export type PropsToForms = {
-  [p in keyof TextDefaultProps & ImageDefaultProps]?: PropToForm;
+  [p in keyof TextDefaultProps &
+    ImageDefaultProps &
+    ShapeDefaultProps]?: PropToForm;
 };

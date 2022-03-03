@@ -13,6 +13,11 @@ export interface ComponentData {
   isLocked: boolean;
 }
 
+export interface PageData {
+  title: string;
+  props: { [key: string]: any };
+}
+
 export interface EditProps {
   // 页面所有组件
   components: ComponentData[];
@@ -23,4 +28,5 @@ export interface EditProps {
 export interface GlobalDataProps {
   components: ComponentData[];
   currentComponentId: string;
+  page: PageData;
 }
