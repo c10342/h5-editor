@@ -83,6 +83,11 @@ export default createStore<GlobalDataProps>({
         }
       }
     },
+    swapComponent(state, { index1, index2 }) {
+      const temp = state.components[index1];
+      state.components[index1] = state.components[index2];
+      state.components[index2] = temp;
+    },
   },
   actions: {},
   modules: {},

@@ -35,7 +35,7 @@ import ImageList from "./layout/image-list.vue";
 
 export default defineComponent({
   components: { TextList, ImageList },
-  setup(props, context) {
+  setup() {
     const activeName = ref("text");
     return {
       activeName,

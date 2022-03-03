@@ -11,9 +11,6 @@ import MainContent from "./layout/main-content.vue";
 
 export default defineComponent({
   components: { MainContent },
-  setup(props, context) {
-    // todo
-  },
 });
 </script>
 

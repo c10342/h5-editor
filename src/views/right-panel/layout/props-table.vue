@@ -73,7 +73,7 @@ interface FormProps {
 
 export default defineComponent({
   components: { ColorPicker, ImageProcess },
-  setup(props, context) {
+  setup() {
     const store = useStore<GlobalDataProps>();
     const currentComponent = computed(() => {
       return store.getters.currentComponent;

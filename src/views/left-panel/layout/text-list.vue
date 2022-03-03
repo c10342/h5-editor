@@ -18,13 +18,16 @@ import { v4 as uuidv4 } from "uuid";
 import { useStore } from "vuex";
 
 export default defineComponent({
-  setup(props, context) {
+  setup() {
     const store = useStore<GlobalDataProps>();
     const onTextClick = (data: TextDefaultProps) => {
       const newComponent: ComponentData = {
         id: uuidv4(),
         name: "custom-text",
         props: data,
+        isHidden: false,
+        isLocked: false,
+        layerName: "图层",
       };
       store.commit("addComponent", newComponent);
     };

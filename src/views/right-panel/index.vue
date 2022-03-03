@@ -17,7 +17,7 @@ import LayerTable from "./layout/layer-table.vue";
 
 export default defineComponent({
   components: { PropsTable, LayerTable },
-  setup(props, context) {
+  setup() {
     const activeName = ref("first");
     return {
       activeName,

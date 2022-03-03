@@ -18,7 +18,7 @@ import EditorWrapper from "../components/editor-wrapper.vue";
 
 export default defineComponent({
   components: { EditorWrapper },
-  setup(props, context) {
+  setup() {
     const store = useStore<GlobalDataProps>();
     // 过滤掉隐藏的组件
     const components = computed(() =>

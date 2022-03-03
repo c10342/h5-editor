@@ -6,11 +6,11 @@ export interface ComponentData {
   //   组件名称，通过动态组件渲染
   name: "custom-text" | "custom-image" | "custom-shape";
   // 图层名称
-  layerName?: string;
+  layerName: string;
   // 是否隐藏
-  isHidden?: boolean;
+  isHidden: boolean;
   // 是否锁定
-  isLocked?: boolean;
+  isLocked: boolean;
 }
 
 export interface EditProps {

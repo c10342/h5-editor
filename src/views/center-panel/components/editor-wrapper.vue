@@ -20,7 +20,7 @@ export default defineComponent({
       require: true,
     },
   },
-  setup(props, context) {
+  setup(props) {
     const store = useStore<GlobalDataProps>();
     // 设置选中的组件
     const onItemClick = () => {

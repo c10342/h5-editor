@@ -21,7 +21,7 @@ import { imageDefaultProps } from "@/default-props";
 import { useStore } from "vuex";
 
 export default defineComponent({
-  setup(props, context) {
+  setup() {
     const uploadImage = new UploadImage();
     const loading = ref(false);
     const store = useStore<GlobalDataProps>();
@@ -32,6 +32,9 @@ export default defineComponent({
         const newComponent: ComponentData = {
           id: uuidv4(),
           name: "custom-image",
+          isHidden: false,
+          isLocked: false,
+          layerName: "图层",
           props: {
             ...imageDefaultProps,
             src: url,

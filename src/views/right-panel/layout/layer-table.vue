@@ -1,11 +1,18 @@
 <template>
-  <div class="layer-table-container">
+  <div class="layer-table-container" @dragend="onDragEnd">
     <div
-      v-for="(layer, index) in layerList"
-      :key="index"
       class="layer-item"
-      :class="{ active: currentComponentId === layer.id }"
+      v-for="(layer, index) in layerList"
+      :key="layer.id"
+      :class="{
+        active: currentComponentId === layer.id,
+        ghost: currentDragId === layer.id,
+      }"
+      :data-index="index"
+      draggable="true"
       @click="onLayerClick(layer.id)"
+      @dragstart="onDragStart(layer.id, index)"
+      @dragenter="onDragEnter(index)"
     >
       <el-tooltip :content="layer.isHidden ? '显示' : '隐藏'" placement="top">
         <el-button
@@ -25,28 +32,59 @@
           <template v-slot:icon v-else><Unlock /> </template>
         </el-button>
       </el-tooltip>
-      <span class="layerName">{{ layer.layerName }}</span>
-      <el-tooltip content="拖动排序" placement="top">
+      <InputEdit
+        class="input-edit"
+        :value="layer.layerName"
+        @change="onInputEditChange(layer.id, $event)"
+      >
+        <span>{{ layer.layerName }}</span>
+      </InputEdit>
+      <!-- <el-tooltip content="拖动排序" placement="top">
         <el-button circle class="move">
           <template v-slot:icon><Ship /> </template
         ></el-button>
-      </el-tooltip>
+      </el-tooltip> -->
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { GlobalDataProps } from "@/types/store";
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { useStore } from "vuex";
+import InputEdit from "../components/input-edit.vue";
 
 export default defineComponent({
-  setup(props, context) {
+  components: { InputEdit },
+  setup() {
     const store = useStore<GlobalDataProps>();
+    let currentDragIndex: number | string = "";
+    let isDragging = false;
+    const currentDragId = ref("");
     const layerList = computed(() => {
       return store.state.components;
     });
-    const handleChange = (id: string, key: string, value: boolean) => {
+    const onDragStart = (id: string, index: number) => {
+      isDragging = true;
+      currentDragId.value = id;
+      currentDragIndex = index;
+    };
+    const onDragEnd = () => {
+      currentDragId.value = "";
+      currentDragIndex = "";
+      isDragging = false;
+    };
+    const onDragEnter = (index: number) => {
+      if (!isDragging || !currentDragIndex) {
+        return;
+      }
+      store.commit("swapComponent", {
+        index1: index,
+        index2: currentDragIndex,
+      });
+      currentDragIndex = index;
+    };
+    const handleChange = (id: string, key: string, value: boolean | string) => {
       store.commit("updateComponent", { id, key, value, isRoot: true });
     };
     const onLayerClick = (id: string) => {
@@ -55,11 +93,19 @@ export default defineComponent({
     const currentComponentId = computed(() => {
       return store.state.currentComponentId;
     });
+    const onInputEditChange = (id: string, data: string) => {
+      handleChange(id, "layerName", data);
+    };
     return {
       layerList,
       handleChange,
       onLayerClick,
       currentComponentId,
+      onInputEditChange,
+      onDragStart,
+      currentDragId,
+      onDragEnd,
+      onDragEnter,
     };
   },
 });
@@ -84,13 +130,15 @@ export default defineComponent({
     &.active {
       border: 1px solid #1890ff;
     }
+    &.ghost {
+      opacity: 0.5;
+    }
     .move {
       margin-left: auto;
       cursor: move;
     }
-    .layerName {
-      flex: 1;
-      margin: 0 10px;
+    .input-edit {
+      margin-left: 10px;
     }
   }
 }
