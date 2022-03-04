@@ -33,10 +33,11 @@
 import { reduce } from "lodash-es";
 import { computed, defineComponent, VNode } from "vue";
 import { mapPropsToForms } from "@/props-map";
-import ColorPicker from "../components/color-picker.vue";
-import ImageProcess from "../components/image-process.vue";
-import IconSwitch from "../components/icon-switch.vue";
-import ShadowPicker from "../components/shadow-picker.vue";
+import ColorPicker from "./color-picker.vue";
+import ImageProcess from "./image-process.vue";
+import IconSwitch from "./icon-switch.vue";
+import ShadowPicker from "./shadow-picker.vue";
+import BackgroundProcess from "./background-process.vue";
 
 interface FormProps {
   // 渲染的组件名称
@@ -61,7 +62,13 @@ interface FormProps {
 }
 
 export default defineComponent({
-  components: { ColorPicker, ImageProcess, IconSwitch, ShadowPicker },
+  components: {
+    ColorPicker,
+    ImageProcess,
+    IconSwitch,
+    ShadowPicker,
+    BackgroundProcess,
+  },
   props: {
     propsList: {
       type: Object,
@@ -116,11 +123,15 @@ export default defineComponent({
   display: flex;
   margin-bottom: 10px;
   flex-direction: row;
+  align-items: center;
   &.no-text {
     display: inline-block;
   }
   .label {
     width: 28%;
+    color: #303133;
+    font-size: 13px;
+    font-weight: 500;
   }
   .prop-component {
     width: 70%;
@@ -138,6 +149,12 @@ export default defineComponent({
     }
   }
   &.item-imageSrc {
+    .prop-component {
+      width: 100%;
+    }
+  }
+  &.item-backgroundImage {
+    display: block;
     .prop-component {
       width: 100%;
     }

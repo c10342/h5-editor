@@ -224,6 +224,9 @@ export const mapPropsToForms: PropsToForms = {
   imageSrc: {
     component: "image-process",
   },
+  backgroundImage: {
+    component: "background-process",
+  },
   backgroundSize: {
     text: "背景大小",
     ...select,

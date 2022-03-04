@@ -1,0 +1,57 @@
+@for $i from 2 to 21 {
+    .pd-#{$i} {
+      padding: #{$i}px;
+    }
+  
+    .pt-#{$i} {
+      padding-top: #{$i}px;
+    }
+  
+    .pb-#{$i} {
+      padding-bottom: #{$i}px;
+    }
+  
+    .pr-#{$i} {
+      padding-right: #{$i}px;
+    }
+  
+    .pl-#{$i} {
+      padding-left: #{$i}px;
+    }
+  
+    .plr-#{$i} {
+      padding-left: #{$i}px;
+      padding-right: #{$i}px;
+    }
+  
+    .ptd-#{$i} {
+      padding-top: #{$i}px;
+      padding-bottom: #{$i}px;
+    }
+  
+    .mt-#{$i} {
+      margin-top: #{$i}px;
+    }
+  
+    .mb-#{$i} {
+      margin-bottom: #{$i}px;
+    }
+  
+    .ml-#{$i} {
+      margin-left: #{$i}px;
+    }
+  
+    .mr-#{$i} {
+      margin-right: #{$i}px;
+    }
+  
+    .mlr-#{$i} {
+      margin-left: #{$i}px;
+      margin-right: #{$i}px;
+    }
+  
+    .mtd-#{$i} {
+      margin-top: #{$i}px;
+      margin-bottom: #{$i}px;
+    }
+  }

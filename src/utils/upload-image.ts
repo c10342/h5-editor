@@ -1,5 +1,4 @@
 import { uploadImage } from "@/api";
-import request from "@/utils/request";
 
 type fn = (data?: any) => any;
 

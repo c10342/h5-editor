@@ -1,19 +1,11 @@
 <template>
   <div class="image-list">
-    <el-button
-      type="primary"
-      @click="onButtonClick"
-      :loading="loading"
-      class="upload-image-button"
-    >
-      上传图片
-    </el-button>
+    <UploadImage @success="onUploadImageSuccess" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, ref } from "vue";
-import UploadImage from "@/utils/upload-image";
+import { defineComponent } from "vue";
 import { getImageDimensions } from "@/utils/hepler";
 import { ComponentData, GlobalDataProps } from "@/types/store";
 import { v4 as uuidv4 } from "uuid";
@@ -22,8 +14,6 @@ import { useStore } from "vuex";
 
 export default defineComponent({
   setup() {
-    const uploadImage = new UploadImage();
-    const loading = ref(false);
     const store = useStore<GlobalDataProps>();
     const addImageComponent = (url: string) => {
       // 获取图片的真实高度
@@ -44,41 +34,13 @@ export default defineComponent({
         store.commit("addComponent", newComponent);
       });
     };
-    const onButtonClick = () => {
-      uploadImage
-        .beforeUpload((file: File) => {
-          loading.value = true;
-          return file;
-        })
-        .start()
-        .then((res: any) => {
-          const urls = res.data.urls;
-          if (urls && urls.length) {
-            addImageComponent(urls[0]);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => {
-          loading.value = false;
-        });
+
+    const onUploadImageSuccess = (url: string) => {
+      addImageComponent(url);
     };
-    onBeforeUnmount(() => {
-      uploadImage.destroy();
-    });
     return {
-      onButtonClick,
-      loading,
+      onUploadImageSuccess,
     };
   },
 });
 </script>
-
-<style lang="scss" scoped>
-.image-list {
-  .upload-image-button {
-    width: 100%;
-  }
-}
-</style>
