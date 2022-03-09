@@ -27,7 +27,7 @@ export default defineComponent({
           layerName: "图层",
           props: {
             ...imageDefaultProps,
-            src: url,
+            imageSrc: url,
             width: (maxWidth > width ? width : maxWidth) + "px",
           },
         };
