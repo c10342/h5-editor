@@ -37,7 +37,7 @@
         :value="layer.layerName"
         @change="onInputEditChange(layer.id, $event)"
       >
-        <span>{{ layer.layerName }}</span>
+        <span>{{ layer.layerName || "未命名" }}</span>
       </InputEdit>
       <!-- <el-tooltip content="拖动排序" placement="top">
         <el-button circle class="move">
