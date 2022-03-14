@@ -13,7 +13,7 @@ export const commonDefaultProps: CommonDefaultProps = {
   url: "",
   // size
   height: "",
-  width: "318px",
+  width: "",
   paddingLeft: "0px",
   paddingRight: "0px",
   paddingTop: "0px",
