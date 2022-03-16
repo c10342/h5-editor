@@ -56,6 +56,8 @@ interface FormProps {
   valueProp?: string;
   // 需要绑定的事件名称
   eventName?: string;
+  // 是否需要隐藏元素，用来跟父级元素联动，父级元素没有值，当前元素需要隐藏
+  isHide?: boolean;
   events: {
     [key: string]: (e: any) => void;
   };
@@ -88,7 +90,16 @@ export default defineComponent({
               initalTransform,
               afterTransform,
               eventName = "change",
+              parent,
             } = item;
+            if (
+              parent &&
+              parent in props.propsList &&
+              !props.propsList[parent]
+            ) {
+              // 跟父级元素进行联动，如果父级元素值为空，当前元素隐藏，不需要显示出来
+              return result;
+            }
             const newItem: FormProps = {
               key,
               ...item,
@@ -113,6 +124,7 @@ export default defineComponent({
         {} as { [key: string]: FormProps }
       );
     });
+
     return { list };
   },
 });
