@@ -24,6 +24,8 @@ export interface PropToForm {
   valueProp?: string;
   // 需要绑定的事件名称
   eventName?: string;
+  // 某些元素需要跟父元素进行联动
+  parent?: string;
 }
 
 export type PropsToForms = {
