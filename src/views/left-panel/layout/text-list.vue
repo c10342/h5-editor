@@ -27,8 +27,9 @@ export default defineComponent({
         props: data,
         isHidden: false,
         isLocked: false,
-        layerName: "图层",
+        layerName: `图层${store.state.components.length + 1}`,
       };
+
       store.commit("addComponent", newComponent);
     };
     return {
