@@ -11,10 +11,18 @@ import { defineComponent } from "vue";
 import LeftPanel from "@/views/left-panel/index.vue";
 import CenterPanel from "@/views/center-panel/index.vue";
 import RightPanel from "@/views/right-panel/index.vue";
+import initHotKeys from "@/plugins/hot-keys";
+import initContextMenu from "@/plugins/context-menu/index";
 
 export default defineComponent({
   name: "App",
   components: { LeftPanel, CenterPanel, RightPanel },
+  setup() {
+    initHotKeys();
+    initContextMenu();
+
+    return {};
+  },
 });
 </script>
 
