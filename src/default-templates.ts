@@ -1,4 +1,4 @@
-import { textDefaultProps } from "@/default-props";
+import { shapeDefaultProps, textDefaultProps } from "@/default-props";
 
 export const defaultTextTemplate = [
   {
@@ -68,6 +68,58 @@ export const defaultTextTemplate = [
 ].map((item) => {
   return {
     ...textDefaultProps,
+    ...item,
+  };
+});
+
+export const defaultShapePropsList = [
+  {
+    backgroundColor: "#efefef",
+    borderWidth: "1px",
+    borderStyle: "solid",
+    borderColor: "#ccc",
+    width: "100px",
+    height: "50px",
+  },
+  {
+    backgroundColor: "#efefef",
+    borderWidth: "1px",
+    borderStyle: "solid",
+    borderColor: "#ccc",
+    borderRadius: "100px",
+    width: "100px",
+    height: "100px",
+  },
+  {
+    backgroundColor: "#efefef",
+    borderWidth: "1px",
+    borderStyle: "solid",
+    borderColor: "#ccc",
+    width: "100px",
+    height: "100px",
+  },
+  {
+    backgroundColor: "#36cfc9",
+    width: "100px",
+    height: "50px",
+  },
+  {
+    backgroundColor: "#40a9ff",
+    borderRadius: "100px",
+    width: "100px",
+    height: "100px",
+  },
+  {
+    backgroundColor: "#9254de",
+    borderWidth: "5px",
+    borderStyle: "solid",
+    borderColor: "#ccc",
+    width: "100px",
+    height: "100px",
+  },
+].map((item) => {
+  return {
+    ...shapeDefaultProps,
     ...item,
   };
 });
