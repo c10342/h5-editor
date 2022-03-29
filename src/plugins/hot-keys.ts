@@ -3,6 +3,7 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 import { GlobalDataProps } from "@/types/store";
 import { HotkeysEvent, KeyHandler } from "hotkeys-js";
+import ComponentOperations from "./operations";
 
 const wrap = (callback: KeyHandler) => {
   const fn = (keyboardEvent: KeyboardEvent, hotkeysEvent: HotkeysEvent) => {
@@ -15,69 +16,73 @@ const wrap = (callback: KeyHandler) => {
 function initHotKeys() {
   const store = useStore<GlobalDataProps>();
   const currentComponentId = computed(() => store.state.currentComponentId);
+  const operations = new ComponentOperations();
   useHotKey("ctrl+c", () => {
-    store.commit("copyComponent", currentComponentId.value);
+    operations.copy(currentComponentId.value);
   });
   useHotKey("ctrl+v", () => {
-    store.commit("pasteComponent");
+    operations.paste();
   });
   useHotKey("esc", () => {
-    store.commit("setActive", "");
+    operations.setActive("");
   });
   useHotKey("backspace, delete", () => {
-    store.commit("deleteComponent", currentComponentId.value);
+    operations.delete(currentComponentId.value);
   });
   useHotKey(
     "up",
     wrap(() => {
-      store.commit("moveComponent", { step: 1, direction: "Up" });
+      operations.move({ step: 1, direction: "Up" });
     })
   );
   useHotKey(
     "down",
     wrap(() => {
-      store.commit("moveComponent", { step: 1, direction: "Down" });
+      operations.move({ step: 1, direction: "Down" });
     })
   );
   useHotKey(
     "left",
     wrap(() => {
-      store.commit("moveComponent", { step: 1, direction: "Left" });
+      operations.move({ step: 1, direction: "Left" });
     })
   );
   useHotKey(
     "right",
     wrap(() => {
-      store.commit("moveComponent", { step: 1, direction: "Right" });
+      operations.move({ step: 1, direction: "Right" });
     })
   );
 
   useHotKey(
     "shift+up",
     wrap(() => {
-      store.commit("moveComponent", { step: 10, direction: "Up" });
+      operations.move({ step: 10, direction: "Up" });
     })
   );
   useHotKey(
     "shift+down",
     wrap(() => {
-      store.commit("moveComponent", { step: 10, direction: "Down" });
+      operations.move({ step: 10, direction: "Down" });
     })
   );
   useHotKey(
     "shift+left",
     wrap(() => {
-      store.commit("moveComponent", { step: 10, direction: "Left" });
+      operations.move({ step: 10, direction: "Left" });
     })
   );
   useHotKey(
     "shift+right",
     wrap(() => {
-      store.commit("moveComponent", { step: 10, direction: "Right" });
+      operations.move({ step: 10, direction: "Right" });
     })
   );
   useHotKey("ctrl+z", () => {
-    store.commit("undo");
+    operations.undo();
+  });
+  useHotKey("ctrl+y", () => {
+    operations.redo();
   });
 }
 
