@@ -52,6 +52,21 @@ const select = { component: "el-select", subComponent: "el-option" };
 export const mapPropsToForms: PropsToForms = {
   // 公共属性
   // 大小
+  actionType: {
+    ...select,
+    text: "点击",
+    options: [
+      { value: "", label: "无" },
+      { value: "to", label: "跳转到 URL" },
+    ],
+  },
+  url: {
+    component: "el-input",
+    text: "链接",
+    eventName: "input",
+    parent: "actionType",
+    extraProps: { placeholder: "请输入跳转链接" },
+  },
   height: {
     text: "高度",
     ...inputNumber,
@@ -122,16 +137,6 @@ export const mapPropsToForms: PropsToForms = {
     afterTransform: (e: number) => e / 100,
     extraProps: { min: 0, max: 100, step: 0.1 },
   },
-  // 位置
-  // position: {
-  //   component: 'a-select',
-  //   subComponent: 'a-select-option',
-  //   text: '定位',
-  //   options: [
-  //     { value: '', text: '默认' },
-  //     { value: 'absolute', text: '绝对定位' }
-  //   ]
-  // },
   left: {
     text: "X轴坐标",
     ...inputNumber,
