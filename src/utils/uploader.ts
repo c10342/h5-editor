@@ -1,14 +1,40 @@
 import { uploadImage } from "@/api";
 
-type fn = (data?: any) => any;
+type FnType = (data?: any) => any;
 
-type BeforeUploadFn = (file: File) => Promise<File> | File;
+type InterceptManageCbItem = { resolve: FnType; reject?: FnType };
 
-class UploadImage {
+class InterceptManage {
+  private cbs: Array<InterceptManageCbItem>;
+
+  constructor() {
+    this.cbs = [];
+  }
+
+  use(onResolveFn: FnType, onRejectFn?: FnType) {
+    this.cbs.push({
+      resolve: onResolveFn,
+      reject: onRejectFn,
+    });
+    return this;
+  }
+
+  forEach(callback: (data: InterceptManageCbItem) => any) {
+    this.cbs.forEach((cbItem) => {
+      callback(cbItem);
+    });
+    return this;
+  }
+}
+
+class Uploader {
   private inputElement: HTMLInputElement | null = null;
-  private resolvePromise: fn | null = null;
-  private rejectPromise: fn | null = null;
-  private beforeUploadFn: BeforeUploadFn | null | undefined = null;
+  private resolvePromise: FnType | null = null;
+  private rejectPromise: FnType | null = null;
+  interceptors = {
+    request: new InterceptManage(),
+    response: new InterceptManage(),
+  };
   constructor() {
     this.initDom();
   }
@@ -38,7 +64,16 @@ class UploadImage {
   }
 
   private uploadFile(file: File) {
-    const china = [this.beforeUploadFn, this.handleUploadFile.bind(this)];
+    const china: Array<FnType | null | undefined> = [
+      this.handleUploadFile.bind(this),
+      null,
+    ];
+    this.interceptors.request.forEach((item) => {
+      china.unshift(item.resolve, item.reject);
+    });
+    this.interceptors.response.forEach((item) => {
+      china.push(item.resolve, item.reject);
+    });
     let p: any = Promise.resolve(file);
     while (china.length) {
       p = p.then(china.shift());
@@ -66,7 +101,6 @@ class UploadImage {
   private resetData() {
     this.resolvePromise = null;
     this.rejectPromise = null;
-    this.beforeUploadFn = null;
   }
 
   clear() {
@@ -85,11 +119,6 @@ class UploadImage {
     return promise;
   }
 
-  beforeUpload(beforeUploadFn: BeforeUploadFn) {
-    this.beforeUploadFn = beforeUploadFn;
-    return this;
-  }
-
   destroy() {
     this.inputElement?.remove();
     this.inputElement = null;
@@ -97,4 +126,4 @@ class UploadImage {
   }
 }
 
-export default UploadImage;
+export default Uploader;
