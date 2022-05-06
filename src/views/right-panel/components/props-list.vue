@@ -1,5 +1,5 @@
 <template>
-  <el-collapse class="props-collapse-container">
+  <el-collapse v-model="activeNames" class="props-collapse-container">
     <el-collapse-item
       :title="ch.text"
       :name="`item-${idx}`"
@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { useStore } from "vuex";
 import { GlobalDataProps } from "@/types/store";
 import PropsGroup from "./props-group.vue";
@@ -70,6 +70,7 @@ const defaultEditGroups: GroupProps[] = [
 export default defineComponent({
   components: { PropsGroup },
   setup() {
+    const activeNames = ref("item-0");
     const store = useStore<GlobalDataProps>();
     const groupList = computed(() => {
       const propsObj = store.getters.currentComponent?.props ?? {};
@@ -95,6 +96,7 @@ export default defineComponent({
     return {
       groupList,
       onPropsChange,
+      activeNames,
     };
   },
 });
