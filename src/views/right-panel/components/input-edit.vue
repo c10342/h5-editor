@@ -5,6 +5,7 @@
       placeholder="文本不能为空"
       v-model="inputValue"
       ref="inputRef"
+      :maxlength="maxlength"
     />
     <slot v-else />
   </div>
@@ -20,6 +21,10 @@ export default defineComponent({
     value: {
       type: String,
       required: true,
+    },
+    maxlength: {
+      type: [String, Number],
+      default: 50,
     },
   },
   emits: ["change"],
