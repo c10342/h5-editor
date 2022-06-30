@@ -24,7 +24,7 @@ export default defineComponent({
           name: "custom-image",
           isHidden: false,
           isLocked: false,
-          layerName: "图层",
+          layerName: `图层${store.state.components.length + 1}`,
           props: {
             ...imageDefaultProps,
             imageSrc: url,

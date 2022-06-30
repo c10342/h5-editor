@@ -63,5 +63,6 @@ button.custom-text {
 .custom-text {
   box-sizing: border-box;
   white-space: pre-wrap;
+  word-break: break-all;
 }
 </style>

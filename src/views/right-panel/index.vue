@@ -1,5 +1,10 @@
 <template>
-  <el-tabs v-model="activeName" type="card" class="right-panel-container">
+  <el-tabs
+    v-model="activeName"
+    type="card"
+    class="right-panel-container"
+    @tab-click="onTabClick"
+  >
     <el-tab-pane label="属性设置" name="first">
       <PropsTable />
     </el-tab-pane>
@@ -13,17 +18,36 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import PropsTable from "./layout/props-table.vue";
 import LayerTable from "./layout/layer-table.vue";
 import PageTable from "./layout/page-table.vue";
+import { useStore } from "vuex";
+import { GlobalDataProps } from "@/types/store";
 
 export default defineComponent({
   components: { PropsTable, LayerTable, PageTable },
   setup() {
     const activeName = ref("first");
+    const store = useStore<GlobalDataProps>();
+    watch(
+      () => store.state.currentComponentId,
+      (newVal) => {
+        if (newVal && activeName.value === "third") {
+          activeName.value = "first";
+        }
+      }
+    );
+    const onTabClick = () => {
+      if (activeName.value === "third") {
+        store.commit("setPageActive");
+      } else {
+        store.commit("setActive", "");
+      }
+    };
     return {
       activeName,
+      onTabClick,
     };
   },
 });

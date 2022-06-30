@@ -12,9 +12,11 @@
 </template>
 
 <script lang="ts">
-import UploadImage from "@/utils/upload-image";
+import { showErrorMessage } from "@/utils/message";
+import UploadImage from "@/utils/uploader";
+import { isString } from "lodash-es";
 import { defineComponent, onBeforeUnmount, ref } from "vue";
-
+const imageType = ["image/png", "image/jpeg"];
 export default defineComponent({
   name: "UploadImage",
   props: {
@@ -37,14 +39,17 @@ export default defineComponent({
   },
   emits: ["success"],
   setup(props, context) {
-    const uploadImage = new UploadImage();
     const loading = ref(false);
+    const uploadImage = new UploadImage();
+    uploadImage.interceptors.request.use((file: File) => {
+      if (!imageType.includes(file.type)) {
+        return Promise.reject("只能上传图片类型的文件");
+      }
+      loading.value = true;
+      return file;
+    });
     const onButtonClick = () => {
       uploadImage
-        .beforeUpload((file: File) => {
-          loading.value = true;
-          return file;
-        })
         .start()
         .then((res: any) => {
           const urls = res.data.urls;
@@ -53,6 +58,9 @@ export default defineComponent({
           }
         })
         .catch((error) => {
+          if (isString(error)) {
+            showErrorMessage(error);
+          }
           console.log(error);
         })
         .finally(() => {

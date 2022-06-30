@@ -37,3 +37,9 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+.custom-shape {
+  box-sizing: border-box;
+}
+</style>

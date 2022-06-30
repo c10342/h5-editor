@@ -2,7 +2,7 @@ import axios from "axios";
 import { ElMessage } from "element-plus";
 
 const token =
-  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEzNDI3NDkxMDUzIiwiX2lkIjoiNjIwMWZjYTY4NzU1NDIwOGZmN2QwNDAzIiwiaWF0IjoxNjQ2MzY2NzE4LCJleHAiOjE2NDY1Mzk1MTh9.q7HU_-eiaNt18iSuC6xSyu1fE3jLZGunP3E6GI7jjTk";
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjEzNDI3NDkxMDUzIiwiX2lkIjoiNjIwMWZjYTY4NzU1NDIwOGZmN2QwNDAzIiwiaWF0IjoxNjQ5NDI5MzAxLCJleHAiOjE2NDk2MDIxMDF9.cJTl83BWDgnaF2czebjCxvAaMmMzfj6Tff9v2qDd1s8";
 
 const instance = axios.create();
 

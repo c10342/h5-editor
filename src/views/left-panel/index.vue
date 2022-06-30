@@ -23,7 +23,7 @@
         </span>
       </template>
 
-      形状
+      <ShapeList />
     </el-tab-pane>
   </el-tabs>
 </template>
@@ -32,9 +32,10 @@
 import { defineComponent, ref } from "vue";
 import TextList from "./layout/text-list.vue";
 import ImageList from "./layout/image-list.vue";
+import ShapeList from "./layout/shape-list.vue";
 
 export default defineComponent({
-  components: { TextList, ImageList },
+  components: { TextList, ImageList, ShapeList },
   setup() {
     const activeName = ref("text");
     return {

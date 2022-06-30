@@ -25,8 +25,44 @@ export interface EditProps {
   currentElement: string;
 }
 
+export interface HistoryProps {
+  id: string;
+  componentId?: string;
+  type: "add" | "delete" | "modify";
+  data: any;
+  index?: number;
+}
+
 export interface GlobalDataProps {
+  // 页面所有组件
   components: ComponentData[];
+  // 当前选中的组件id
   currentComponentId: string;
+  // 页面数据
   page: PageData;
+  // 被复制的组件
+  copiedComponent: ComponentData | null;
+  // 当前操作的历史记录
+  histories: HistoryProps[];
+  // 当前历史记录的操作位置
+  historyIndex: number;
+  // 防抖，一开始的值
+  cacheOldValue: any;
+  // 最大历史条目
+  maxHistoryNumber: number;
+  // 是否选中页面
+  isPageActive: boolean;
+  // 画布是否发生了修改
+  isDirty: boolean;
+  // 是否正在保存
+  isSaving: boolean;
+}
+
+export type MoveDirection = "Up" | "Down" | "Left" | "Right";
+
+export interface UpdateComponentData {
+  key: string | string[];
+  value: string | string[];
+  id: string;
+  isRoot: boolean;
 }

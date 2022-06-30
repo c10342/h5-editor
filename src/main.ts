@@ -16,6 +16,9 @@ import {
   Ship,
   UploadFilled,
   Delete,
+  ArrowLeft,
+  ArrowRight,
+  QuestionFilled,
 } from "@element-plus/icons-vue";
 import "element-plus/dist/index.css";
 import "@/assets/styles/reset.css";
@@ -51,6 +54,9 @@ const iconsList = [
   Ship,
   UploadFilled,
   Delete,
+  ArrowLeft,
+  ArrowRight,
+  QuestionFilled,
 ];
 
 const app = createApp(App);
